@@ -38,7 +38,7 @@ You'll also see more complicated lines, for example, this:
 
 This represents the scoreboard at some particular time in the game. I know exactly when, and this is what the scoreboard would look like in-game: 
 
-![an image of the scoreboard](https://imgur.com/a/YtsDgeP)
+![an image of the scoreboard](https://imgur.com/a/YtsDgeP.png)
 
 By comparing the two, we can easily reverse-engineer the otherwise confusing `scb` line of text. It simply contains the text for each row on the scoreboard, starting from the top left and going down. 
 
@@ -88,8 +88,47 @@ Well, it refers to player 12. Cross-referencing the image of the scoreboard, we 
 
 `cs 2924 "\name\M^5i^7n^5i^7onsman\hand\0\color\255 128 128"`
 
-we can see that the player *Minionsman* was assigned the number 2924-2912 = **12**. Cool, huh?
+we can see that the player *Minionsman* was assigned the number 2924-2912 = **12**. Cool, huh? Remember that.
 
-**TODO**
+Sidenote: In Warsow/Warfork, colors can be used in names with the combination of the character ^ and a number. I know that ^5 means cyan, and ^7 means white. If we look at the image of the scoreboard, we can see that this player colored two characters in their name to be cyan, and the rest white. 
 
--write about how I parse `plstats` lines
+The default color is ^7 (white), which is the why the first character in the name is white.
+`M^5i^7n^5i^7onsman` == `^7M^5i^7n^5i^7onsman`
+
+But how do I actually get weapon statistics from the demo?
+In the demo file, you might see a line that begins with
+
+`plstats 0 " 12 0 0 0 10 1 131 29 0 589 162 589 51 21 51 0"`
+
+
+Note: there are two versions of the `plstats` line: `plstats 0` and `plstats 2`. plstats 0 contains weapon accuracy numbers, while plstats 2 contains weapon damage statistics.
+
+We can see the `plstats 0` line contains a list of numbers. What are these numbers? Well, if we cross-reference with the image of the scoreboard, we might be able to find out.
+
+From the image, we can see that the player *Minionsman* has the following weapon stats for this particular demo:
+```
+GL: 10%
+RL: 22%
+LG: 28%
+EB: 41%
+```
+
+Look at the plstats line: `plstats 0 " 12 ...`
+This line contains the stats of the player number 12. Remember who player 12 was? *Minionsman*.
+
+The following numbers are arranged in pairs, with the number of shots fired and shots hit for that particular weapon. If you know the order of the weapons in-game, you can determine which numbers correspond to which weapon. 
+
+See `10 1` in `plstats 0 " 12 0 0 0 10 1 131 29 0 589 162 589 51 21 51 0"`?
+
+That's the number of shots fired for the GL, followed by how many of those hit. If we just divide how many shots hit by the total amount and multiply by 100, we can get a percentage.
+(1 / 10) * 100 == 10%. Remember what I told you what this player's GL accuracy was? 10%! Cool! Go look at the image of the scoreboard if you want to double check.
+
+Look at this pair: `131 29`. That's the shots fired, shots hit pair for the RL weapon. (29 / 131) * 100 == 22.13%, which checks out. This player had an RL accuracy of 22%!
+
+That's how I pull accuracy information from the demos. There are some irregularities, for example, if a weapon wasn't used at all during a match, it will be recorded as a `0` in the plstats line, and not `0 0`. 
+
+When designing the algorithm for parsing these `plstats 0` lines, I had to take into account that the list of numbers isn't always uniform. Sometimes a weapon wasn't used, and so it was recorded as a single number, instead of a pair of numbers. 
+
+That's it! You now understand what a .wdz20 file is and what it contains.
+
+**At this point in the project, I am only parsing weapon accuracies from the demo. In the future, I will be storing more information about each demo. This file will be updated with the relevant information when that happens.**
