@@ -26,7 +26,7 @@ Sidenote: [Warfork](https://store.steampowered.com/app/671610/Warfork/) is a for
 You may be wondering why the project is called 
 > WF-Stats
 
-when I just talked a lot about Warsow. It's simply because I have more demos from Warfork than Warsow, and so that's where the majority of the data is coming from.
+when I've been speaking about Warsow. It's simply because I have more demos from Warfork than Warsow, and so that's where the majority of the data is coming from.
 
 ## **The Methods**
 
