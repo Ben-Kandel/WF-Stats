@@ -38,7 +38,7 @@ You'll also see more complicated lines, for example, this:
 
 This represents the scoreboard at some particular time in the game. I know exactly when, and this is what the scoreboard would look like in-game: 
 
-![an image of the scoreboard](https://imgur.com/a/YtsDgeP.jpg)
+![an image of the scoreboard](http://i.imgur.com/a/YtsDgeP.jpg)
 
 By comparing the two, we can easily reverse-engineer the otherwise confusing `scb` line of text. It simply contains the text for each row on the scoreboard, starting from the top left and going down. 
 
