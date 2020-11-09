@@ -46,7 +46,7 @@ By comparing the two, we can easily reverse-engineer the otherwise confusing `sc
 
 The section `&p 12 ^3ICA^7 40 15 0 92 0` represents some player (numbered 12), with a clan tag of ICA, a score of 40, 15 frags, 0 MVPs, and 92 ping. There is always an extra 0 at the end; I'm not sure what this represents. If we cross reference this with the image, we can see that indeed, the top-left row of the scoreboard has a player with this information.
 
-But just who is this player 12? They are represented as `&p 12` in the file, but in the image, we can see they have a name. There does this come from?
+But just who is this player 12? They are represented as `&p 12` in the file, but in the image, we can see they have a name. Where does this come from?
 
 In the first few hundred lines of the output of `strings`, we will see a bunch of lines like this:
 
@@ -76,7 +76,7 @@ cs 2923 "\name\Player^7(1)\hand\0\color\102 99 180"
 cs 2924 "\name\M^5i^7n^5i^7onsman\hand\0\color\255 128 128"
 ```
 
-A line like this appears whenever a player connects to the server for the first time in a match. When the server switches maps, all players reconnect to the server automatically, which is why we see all of these consecutive lines.
+A line like this appears whenever a player connects to the server for the first time in a match. When the server switches maps, all players reconnect to the server automatically, which is why we see all of these consecutive lines near the beginning of the demo file.
 
 The first line contains `cs 2912`. This is the number that we will be referring to this player by for the rest of the demo, except...there's some offset, which is 2912. We can see that each consecutive player gets a new number. If we subtract 2912 from them, we can get their player number for this particular demo. 
 
@@ -125,7 +125,12 @@ That's the number of shots fired for the GL, followed by how many of those hit. 
 
 Look at this pair: `131 29`. That's the shots fired, shots hit pair for the RL weapon. (29 / 131) * 100 == 22.13%, which checks out. This player had an RL accuracy of 22%!
 
-That's how I pull accuracy information from the demos. There are some irregularities, for example, if a weapon wasn't used at all during a match, it will be recorded as a `0` in the plstats line, and not `0 0`. 
+
+I've provided with you with the other weapon accuracies, specifically LG: 28% and EB: 41%. See if you can find which numbers in 
+`plstats 0 " 12 0 0 0 10 1 131 29 0 589 162 589 51 21 51 0"`
+correspond to those accuracies.
+
+That's how I pull accuracy information from the demos. There are some irregularities, for example, if a weapon wasn't used at all during a match, it will be recorded as a `0` in the plstats line, and not `0 0`. There are also duplicate and useless extra numbers near the end of the list, which might be the remnants of the old weak/strong ammo system. 
 
 When designing the algorithm for parsing these `plstats 0` lines, I had to take into account that the list of numbers isn't always uniform. Sometimes a weapon wasn't used, and so it was recorded as a single number, instead of a pair of numbers. 
 
