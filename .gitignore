@@ -1,0 +1,8 @@
+# Files in the demo scraper directory
+demo-scraper/__pycache__
+!demo-scraper/demos/
+demo-scraper/demos/**
+!demo-scraper/demos/README.md
+
+# files in the server directory
+server/node_modules

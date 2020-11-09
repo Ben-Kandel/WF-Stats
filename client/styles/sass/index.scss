@@ -1,0 +1,44 @@
+@import "./variables";
+
+*{
+    font-family: sans-serif;
+}
+
+body{
+    background-color: $rich-black;
+    color: $flax;
+    text-align: center;
+}
+
+.row{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    background-color: $flax;
+    border: 2px solid $rich-black;
+    border-radius: 10px;
+    justify-content: space-evenly;
+    padding: 25px;
+    color: $rich-black;
+}
+
+.graph{    
+    border: 2px solid $rich-black;
+    border-radius: 10px;
+    background-color: $english-violet;
+
+    canvas{
+        margin: 0 auto;
+    }
+}
+
+#weapon-stats-column{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    background-color: $fire-opal;
+    border: 2px solid $rich-black;
+    border-radius: 10px;
+    padding: 20px;
+    color: $rich-black;
+}
