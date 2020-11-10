@@ -12,7 +12,9 @@ Run `npm install`. This will install all of the required dependencies as specifi
 
 The server can be started with `node index.js`.
 
-ExpressJS is the framework I use for setting up the api endpoints.
+ExpressJS is the framework I used for setting up the api endpoints.
+
+
 The file index.js sets up the routes and starts the server.
 The file dbService.js contains functions for interfacing with the SQLite database.
 
