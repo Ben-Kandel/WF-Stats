@@ -3,7 +3,7 @@
 ## **The Goal**
 [Warsow](https://warsow.net/) is an open-source arena FPS, first released in 2005 as an alpha version.
 
-I will not describe the game here (that information is available on the wbesite), but I will say that movement and aim are the key to success.
+I will not describe the game here (that information is available on the website), but I will say that it is easily the fastest, hardest, most competitive, and most rewarding game I have ever played.
 
 Player statistics are displayed in-game on the scoreboard, but are not available anywhere else. For other arena FPS games, websites like [qlstats.net](https://qlstats.net/) exist. However, there is nothing like this for Warsow.
 
@@ -14,11 +14,11 @@ Demo files basically contain lines of timestamped commands that the engine reads
 This is why you can't easily export demo files to a video format - that information simply doesn't exist in the files.
 The qfusion engine takes care of translating demo files to something you can see. Demo files don't make sense by themselves.
 
-**Except**...you can parse some useful information from them. You can extract .wdz20 files and look through the resulting files.
+**Except**...you can parse some useful information from them. You can extract .wdz20 files and look through the results.
 Each demo contains a file, which you can run the `strings` utility on. `strings` takes in a file and returns printable character sequences.
 We can use this to look at the contents of any demo. More information about this is located in the demo-scraper directory.
 
-**This project is my attempt to provide a way to collate and visualize player statistics.**
+**This project is my attempt to collate and visualize player statistics (specifically, my statistics).**
 *It's also a great way for me to learn front-end technologies :)*
 
 Sidenote: [Warfork](https://store.steampowered.com/app/671610/Warfork/) is a fork of Warsow. There is a lot to talk about here with regards to why it was created and the goals of each game, but I will not go into that here. At the time of writing, both games are very similar, and use the same file format for their demos. That means the demo-scraper will work on both Warfork **AND** Warsow demos. 
@@ -26,7 +26,7 @@ Sidenote: [Warfork](https://store.steampowered.com/app/671610/Warfork/) is a for
 You may be wondering why the project is called 
 > WF-Stats
 
-when I've been speaking about Warsow. It's simply because I have more demos from Warfork than Warsow, and so that's where the majority of the data is coming from.
+when I've been speaking about Warsow. It is simply because I have more demos from Warfork than Warsow, and so that's where the majority of the data is coming from.
 
 ## **The Methods**
 
@@ -34,7 +34,7 @@ This project is made up of 3 parts: the [demo scraper](./demo-scraper), the [api
 
 The demo scraper is written in Python. It takes in any amount of .wdz20 files and writes relevant information into the sqlite database.
 
-The api server is written using NodeJS and Express. It provides API endpoints for the client and sends data from the sqlite database.
+The api server is written using NodeJS and Express. It provides API endpoints for the client and interfaces with the sqlite database.
 
 The client is written in vanilla HTML, CSS, and Javascript. It visualizes the data for the user.
 
@@ -51,7 +51,7 @@ More information about each of these parts is available in their respective dire
 - Git/GitHub (for version control)
 
 ## **TODO**
-The demo scraper does not automatically extract .wdz20 files into their respective folders. This has to be done manually for now.
+The demo scraper does not automatically extract .wdz20 files so that we can run `strings` on them. This has to be done manually for now.
 Use a program like 7-zip to extract all of your .wdz20 files into the demo-scraper/demos directory.
 
 I'm ignoring all other player stats except mine. I think this is fine for now, but it would be interesting to gather other players' information.
