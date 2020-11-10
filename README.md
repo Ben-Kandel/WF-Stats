@@ -34,7 +34,7 @@ This project is made up of 3 parts: the [demo scraper](./demo-scraper), the [api
 
 The demo scraper is written in Python. It takes in any amount of .wdz20 files and writes relevant information into the sqlite database.
 
-The api server is written using NodeJS and Express. It provides API endpoints for the client by pulling data from the sqlite database.
+The api server is written using NodeJS and Express. It provides API endpoints for the client and sends data from the sqlite database.
 
 The client is written in vanilla HTML, CSS, and Javascript. It visualizes the data for the user.
 
