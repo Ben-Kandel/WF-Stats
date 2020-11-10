@@ -1,6 +1,6 @@
 # This directory contains the api server portion of the project.
 
-The server is written using javascript, specifically NodeJS.
+The server is written using javascript, specifically NodeJS and ExpressJS.
 
 It interfaces with the SQLite database file, located in the [demo-scraper](../demo-scraper) directory.
 
